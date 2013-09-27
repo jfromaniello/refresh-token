@@ -1,9 +1,14 @@
 {
   "name": "refresh-token",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Returns a new oauth2 access token when expired.",
   "main": "lib/refresh.js",
-  "keywords": ["oauth2", "oauth", "refresh", "token"],
+  "keywords": [
+    "oauth2",
+    "oauth",
+    "refresh",
+    "token"
+  ],
   "scripts": {
     "test": "mocha --require should"
   },
