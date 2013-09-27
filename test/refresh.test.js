@@ -15,7 +15,7 @@ describe('TokenProvider', function () {
     }).should.throw('missing refresh_token parameter');
   });
 
-  it('should provide a new token', function (done) {
+  it('should provide a new token when it doesnt have access_token', function (done) {
     var tokenProvider = new TokenProvider(
         'https://accounts.google.com/o/oauth2/token', {
           refresh_token: testingKeys.refresh_token,
@@ -26,6 +26,24 @@ describe('TokenProvider', function () {
     tokenProvider.getToken(function(err, token){
       token.should.not.eql(testingKeys.access_token);
       done();
+    });
+  });
+
+  it('should emit new token when generating a token', function (done) {
+    var tokenProvider = new TokenProvider(
+        'https://accounts.google.com/o/oauth2/token', {
+          refresh_token: testingKeys.refresh_token,
+          client_id: testingKeys.client_id,
+          client_secret: testingKeys.client_secret
+        });
+
+    tokenProvider.on('new token', function (tokenProps) {
+      tokenProps.access_token.should.not.eql(testingKeys.access_token);
+      done();
+    });
+
+    tokenProvider.getToken(function(err, token){
+      //no op;
     });
   });
 

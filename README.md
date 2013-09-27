@@ -34,7 +34,7 @@ There is also a GoogleTokenProvider which has the url already set:
 ~~~javascript
 var GoogleTokenProvider = require('refresh-token').GoogleTokenProvider;
 
-var tokenProvider = new TokenProvider({
+var tokenProvider = new GoogleTokenProvider({
     refresh_token: 'refresh token', 
     client_id:     'client id', 
     client_secret: 'client secret'
