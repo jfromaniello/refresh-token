@@ -79,7 +79,48 @@ describe('TokenProvider', function () {
     });
   });
 
-  
+  it('should return error when refresh token is wrong', function (done) {
+    var tokenProvider = new TokenProvider(
+        'https://accounts.google.com/o/oauth2/token', {
+          refresh_token: testingKeys.refresh_token + "/dsads",
+          client_id: testingKeys.client_id,
+          client_secret: testingKeys.client_secret
+        });
+
+    tokenProvider.getToken(function(err){
+      err.message.should.eql('invalid_grant');
+      done();
+    });
+  });
+
+  it('should return error when secret is wrong', function (done) {
+    var tokenProvider = new TokenProvider(
+        'https://accounts.google.com/o/oauth2/token', {
+          refresh_token: testingKeys.refresh_token,
+          client_id: testingKeys.client_id,
+          client_secret: testingKeys.client_secret  + "|dad21333"
+        });
+
+    tokenProvider.getToken(function(err){
+      err.message.should.eql('invalid_client');
+      done();
+    });
+  });
+
+  it('should return error when client is wrong', function (done) {
+    var tokenProvider = new TokenProvider(
+        'https://accounts.google.com/o/oauth2/token', {
+          refresh_token: testingKeys.refresh_token,
+          client_id: testingKeys.client_id + "|dad21333",
+          client_secret: testingKeys.client_secret
+        });
+
+    tokenProvider.getToken(function(err){
+      err.message.should.eql('invalid_client');
+      done();
+    });
+  });
+
   it('should allows to pass a curren token with expires_in property', function (done) {
     var tokenProvider = new TokenProvider(
         'https://accounts.google.com/o/oauth2/token', {
