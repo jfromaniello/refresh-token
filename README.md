@@ -24,8 +24,9 @@ var tokenProvider = new TokenProvider('http://token-url', {
     */
   });
 
-tokenProvider.getToken(function (err, token) {
- //token will be a valid access token.
+tokenProvider.getToken(function (err, accessToken, refreshToken) {
+ //accessToken will be a valid access token.
+ //refreshToken if it is reissued by the provider.
 });
 ~~~
 
