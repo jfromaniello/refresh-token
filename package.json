@@ -16,7 +16,7 @@
   "author": "José F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
   "license": "MIT",
   "dependencies": {
-    "request": "~2.12.0"
+    "request": "^2.68.0"
   },
   "devDependencies": {
     "should": "~1.2.1",
